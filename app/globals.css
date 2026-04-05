@@ -1,0 +1,185 @@
+@import "tailwindcss";
+
+/* =========================================
+   THEME VARIABLES
+   ========================================= */
+@theme {
+  --color-accent: 99 102 241;
+  --color-accent-dark: 79 70 229;
+}
+
+/* =========================================
+   BASE STYLES
+   (Tailwind v4: use @layer base with plain CSS
+    for pseudo-elements like scrollbars)
+   ========================================= */
+@layer base {
+  :root {
+    --accent: 99 102 241;
+    --accent-dark: 79 70 229;
+  }
+
+  * {
+    box-sizing: border-box;
+  }
+
+  body {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+}
+
+/* =========================================
+   SCROLLBAR
+   (Tailwind v4: @apply does NOT work inside
+    ::-webkit-scrollbar selectors — use plain CSS)
+   ========================================= */
+::-webkit-scrollbar {
+  width: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background-color: #f3f4f6; /* gray-100 */
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: #d1d5db; /* gray-300 */
+  border-radius: 9999px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background-color: #9ca3af; /* gray-400 */
+}
+
+/* =========================================
+   COMPONENT CLASSES
+   ========================================= */
+@layer components {
+
+  /* Email Tag Chip */
+  .email-chip {
+    @apply inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-sm font-medium
+           bg-indigo-50 text-indigo-700 border border-indigo-200
+           transition-all duration-150 hover:bg-indigo-100;
+  }
+
+  .email-chip-red {
+    @apply bg-rose-50 text-rose-700 border-rose-200 hover:bg-rose-100;
+  }
+
+  /* Glass Card */
+  .glass-card {
+    @apply bg-white/80 backdrop-blur-sm rounded-2xl border border-white/60
+           shadow-xl shadow-black/5;
+  }
+
+  /* Input Base */
+  .input-base {
+    @apply w-full px-4 py-3 rounded-xl border border-gray-200 bg-gray-50
+           text-gray-900 placeholder-gray-400 text-sm font-medium
+           focus:outline-none focus:ring-2 focus:ring-indigo-500/30
+           focus:border-indigo-400 focus:bg-white
+           transition-all duration-200;
+  }
+
+  /* Primary Button */
+  .btn-primary {
+    @apply flex items-center justify-center gap-2.5 w-full py-4 px-6
+           bg-gradient-to-r from-indigo-600 to-indigo-700
+           hover:from-indigo-700 hover:to-indigo-800
+           text-white font-semibold text-base rounded-xl
+           shadow-lg shadow-indigo-500/25
+           transition-all duration-200 ease-out
+           hover:shadow-xl hover:shadow-indigo-500/30
+           hover:-translate-y-0.5
+           active:translate-y-0 active:shadow-md
+           disabled:opacity-60 disabled:cursor-not-allowed
+           disabled:hover:translate-y-0 disabled:hover:shadow-lg;
+  }
+
+  /* Secondary Button */
+  .btn-secondary {
+    @apply flex items-center justify-center gap-2 px-5 py-2.5
+           bg-white hover:bg-gray-50 text-gray-700 font-medium text-sm
+           rounded-xl border border-gray-200 shadow-sm
+           transition-all duration-200 hover:shadow-md
+           active:scale-95;
+  }
+}
+
+/* =========================================
+   UTILITIES
+   ========================================= */
+@layer utilities {
+
+  /* Gradient Background */
+  .gradient-bg {
+    background:
+      radial-gradient(ellipse at 20% 20%, rgba(99, 102, 241, 0.08) 0%, transparent 50%),
+      radial-gradient(ellipse at 80% 80%, rgba(168, 85, 247, 0.06) 0%, transparent 50%),
+      #f8fafc;
+  }
+
+  /* Spinner */
+  .spin-slow {
+    animation: spin-slow 2s linear infinite;
+  }
+
+  /* Pulse Dot */
+  .pulse-dot {
+    animation: pulse-dot 1.5s ease-in-out infinite;
+  }
+
+  /* Fade In Up */
+  .animate-fade-in-up {
+    animation: fade-in-up 0.4s ease-out forwards;
+  }
+
+  /* Slide In */
+  .animate-slide-in {
+    animation: slide-in 0.25s ease-out forwards;
+  }
+}
+
+/* =========================================
+   KEYFRAMES
+   (Must be outside @layer in Tailwind v4)
+   ========================================= */
+@keyframes spin-slow {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes pulse-dot {
+  0%, 100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.5;
+    transform: scale(0.8);
+  }
+}
+
+@keyframes fade-in-up {
+  from {
+    opacity: 0;
+    transform: translateY(16px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes slide-in {
+  from {
+    opacity: 0;
+    transform: translateX(-8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
